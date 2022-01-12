@@ -1,7 +1,15 @@
-const path = require("path");
-
 module.exports = {
-	outputDir: path.resolve(__dirname, "./docs"),
-	assetsDir: "./static",
-	publicPath: "/speqagri-landingpage-cli/"
+    publicPath: process.env.NODE_ENV === 'production' ? '/speqagri-landingpage-cli/' : '/',
+
+    pluginOptions: {
+      i18n: {
+        locale: 'et',
+        fallbackLocale: 'en',
+        localeDir: 'lang',
+        enableLegacy: false,
+        runtimeOnly: false,
+        compositionOnly: false,
+        fullInstall: true
+      }
+    }
 }
