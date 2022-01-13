@@ -7,9 +7,10 @@ import '@fortawesome/fontawesome-free/js/all.js'
 import '@/assets/css/template-basic-style.css'
 import i18n from './i18n'
 import store from "@/store";
+import router from './router'
 
 
-createApp(App)
+createApp(App).use(router)
 	.use(i18n)
 	.use(store)
 	.mount('#app')

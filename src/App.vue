@@ -1,26 +1,40 @@
 <template>
   <the-navbar></the-navbar>
-  <the-services></the-services>
-  <main-page></main-page>
+  <router-view>
+  </router-view>
   <the-footer></the-footer>
 </template>
-
 <script>
 import TheNavbar from "@/components/TheNavbar";
-import MainPage from "@/pages/MainPage";
 import TheFooter from "@/components/TheFooter";
-import TheServices from "@/components/TheServices";
+
 export default {
-  name: 'App',
+  name: "App",
   components: {
     TheNavbar,
-    MainPage,
     TheFooter,
-    TheServices,
   }
 }
 </script>
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
-<style>
+#nav {
+  padding: 30px;
 
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
 </style>
