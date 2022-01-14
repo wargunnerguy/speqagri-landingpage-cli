@@ -99,6 +99,8 @@
         </div>
       </div>
     </div>
+
+    <the-text-scroller-gadget></the-text-scroller-gadget>
   </section>
 
   <section class="our-courses" id="courses">
@@ -108,7 +110,7 @@
           <div class="section-heading">
             <h2>{{ $t('Services') }}</h2>
           </div>
-            <the-services></the-services>
+          <the-services></the-services>
         </div>
       </div>
     </div>
@@ -165,16 +167,21 @@
       </div>
     </div>
   </section>
+  <the-sponsor-section></the-sponsor-section>
   <the-footer></the-footer>
 </template>
 
 <script>
-import TheServices from "@/components/TheServices";
+import TheServices from "@/sections/TheServices";
+import TheSponsorSection from "@/sections/TheSponsorSection";
+import TheTextScrollerGadget from "@/components/TheTextScrollerGadget";
 
 export default {
   name: "MainPage",
   components: {
     TheServices,
+    TheSponsorSection,
+    TheTextScrollerGadget
   }
 }
 </script>

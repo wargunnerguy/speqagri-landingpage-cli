@@ -5,8 +5,8 @@
   <the-footer></the-footer>
 </template>
 <script>
-import TheNavbar from "@/components/TheNavbar";
-import TheFooter from "@/components/TheFooter";
+import TheNavbar from "@/sections/TheNavbar";
+import TheFooter from "@/sections/TheFooter";
 
 export default {
   name: "App",
@@ -23,6 +23,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #f36f36;
 }
 
 #nav {

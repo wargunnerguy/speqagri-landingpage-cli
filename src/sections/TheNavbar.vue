@@ -14,19 +14,14 @@
               {{ $t('Services') }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li v-for="service in this.$store.state.services" :key="service.id" ><a class="dropdown-item" href="#">{{ $t(service.translation_tag)}}</a></li>
             </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{ $t('calculator') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">{{ $t('job_vacancies') }}</a>
+            <router-link class="nav-link" aria-current="page" :to="{name: 'Jobs'}">{{ $t('job_vacancies') }} <span class="badge bg-danger">0</span></router-link>
           </li>
         </ul>
         <ul class="navbar-nav">
