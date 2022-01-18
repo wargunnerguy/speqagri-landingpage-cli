@@ -3,7 +3,7 @@
     <img :src="img" class="card-img-top" style="transform: scale(1.1)" alt="">
     <div class="card-body text-light">
       <h5 class="card-title">{{ name }}</h5>
-      <p class="card-text">{{ description }}</p>
+<!--      <p class="card-text">{{ description }}</p>-->
     </div>
     <the-service-item-button>Vaata SEDA</the-service-item-button>
   </div>

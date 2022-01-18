@@ -5,6 +5,7 @@
   <the-footer></the-footer>
 </template>
 <script>
+
 import TheNavbar from "@/sections/TheNavbar";
 import TheFooter from "@/sections/TheFooter";
 
@@ -13,7 +14,7 @@ export default {
   components: {
     TheNavbar,
     TheFooter,
-  }
+  },
 }
 </script>
 <style lang="scss">

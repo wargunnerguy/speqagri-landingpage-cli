@@ -90,6 +90,11 @@ const store = createStore({
 				},
 			]
 		}
+	},
+	getters: {
+		services(state) {
+			return state.services;
+		}
 	}
 })
 

@@ -14,7 +14,7 @@
               {{ $t('Services') }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li v-for="service in this.$store.state.services" :key="service.id" ><a class="dropdown-item" href="#">{{ $t(service.translation_tag)}}</a></li>
+              <li v-for="service in services" :key="service.id" ><a class="dropdown-item" href="#">{{ $t(service.translation_tag)}}</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -36,11 +36,15 @@
 
 <script>
 import TheLocaleChanger from "@/components/TheLocaleChanger";
+import {mapGetters} from "vuex";
 
 export default {
   name: "TheNavbar",
   components: {
     TheLocaleChanger
+  },
+  computed: {
+    ...mapGetters(['services'])
   }
 
 }
