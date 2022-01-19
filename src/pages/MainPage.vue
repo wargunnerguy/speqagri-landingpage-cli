@@ -1,6 +1,6 @@
 <template>
   <the-navbar></the-navbar>
-  <section class="apply-now" id="apply">
+  <section class="apply-now">
     <div class="container">
       <div class="card bg-transparent border-0 p-5">
         <img class="card-img align-self-center" :src="require(`@/assets/img/logo-image-speq-agri.png`)" alt="">
@@ -8,16 +8,8 @@
       </div>
     </div>
   </section>
-
   <the-services></the-services>
-
-  <section class="our-facts">
-    <div class="container">
-      <div class="row">
-
-      </div>
-    </div>
-  </section>
+  <the-machines></the-machines>
   <the-sponsor-section></the-sponsor-section>
   <the-footer></the-footer>
 </template>
@@ -26,13 +18,15 @@
 import TheServices from "@/sections/TheServices";
 import TheSponsorSection from "@/sections/TheSponsorSection";
 import TheTextScrollerGadget from "@/components/TheTextScrollerGadget";
+import TheMachines from "@/sections/TheMachines";
 
 export default {
   name: "MainPage",
   components: {
     TheServices,
     TheSponsorSection,
-    TheTextScrollerGadget
+    TheTextScrollerGadget,
+    TheMachines,
   }
 }
 </script>

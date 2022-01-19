@@ -1024,7 +1024,7 @@ section.apply-now {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 10px 0px;
+    padding: 10px 0;
 }
 
 section.apply-now .item {
@@ -1108,7 +1108,7 @@ section.our-services {
     background-attachment: fixed;
     background-repeat: repeat;
     background-size: initial;
-    padding-top: 140px;
+    padding-top: 3rem;
     padding-bottom: 130px;
 }
 
@@ -1118,7 +1118,7 @@ section.our-services {
 
 .our-services .item .down-content h4 {
     padding: 25px;
-    font-size: 18px;
+    font-size: 46px;
     color: #1f272b;
     text-align: center;
     border-bottom: 1px solid #eee;

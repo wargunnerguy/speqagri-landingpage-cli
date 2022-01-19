@@ -5,7 +5,7 @@
       <h5 class="card-title">{{ name }}</h5>
 <!--      <p class="card-text">{{ description }}</p>-->
     </div>
-    <the-service-item-button>Vaata SEDA</the-service-item-button>
+    <the-service-item-button>Rohkem infot</the-service-item-button>
   </div>
 </template>
 

@@ -2,7 +2,6 @@
   <section class="our-services" id="services">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
           <div class="section-heading">
             <h2>{{ $t('Services') }}</h2>
           </div>
@@ -14,7 +13,6 @@
                           :description=$t(service.desc)
             ></service-item>
           </div>
-        </div>
       </div>
     </div>
   </section>
@@ -31,5 +29,9 @@ export default {
 </script>
 
 <style scoped>
-
+h2 {
+  font-size: 35px;
+  font-weight: inherit;
+  border: none;
+}
 </style>
