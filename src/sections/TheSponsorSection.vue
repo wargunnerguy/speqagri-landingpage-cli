@@ -1,5 +1,5 @@
 <template>
-  <section id="sponsor" class="section">
+  <section id="sponsor" class="section pb-3">
     <div class="container">
       <img src="@/assets/img/leader.gif" alt=""/>
       <h1>{{ $t("sponsor_heading_1") }}</h1>
@@ -19,5 +19,13 @@ export default {
 <style scoped>
 section {
   background-color: #dfd4be;
+}
+
+p {
+  font-weight: bold;
+}
+
+h1, p {
+  text-align: left;
 }
 </style>

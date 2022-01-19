@@ -25,7 +25,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   background-color: #f36f36;
+
+  h2 {
+    font-size: 35px;
+    font-weight: inherit;
+    border: none;
+  }
+
 }
+
 
 #nav {
   padding: 30px;

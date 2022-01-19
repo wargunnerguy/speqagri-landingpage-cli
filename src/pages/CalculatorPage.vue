@@ -3,11 +3,11 @@
     <!-- row-t title -->
     <div class="row-t title">
       <ul>
-        <li style="width: 35%">{{ $t("message.calc_product") }}</li>
-        <li style="width: 17%">{{ $t("message.calc_price") }}</li>
-        <li style="width: 17%">{{ $t("message.calc_tax") }} 20%</li>
-        <li style="width: 17%">{{ $t("message.calc_price_and_tax") }}</li>
-        <li style="width: 14%">{{ $t("message.calc_select") }}</li>
+        <li style="width: 35%">{{ $t("calc_product") }}</li>
+        <li style="width: 17%">{{ $t("calc_price") }}</li>
+        <li style="width: 17%">{{ $t("calc_tax") }} 20%</li>
+        <li style="width: 17%">{{ $t("calc_price_and_tax") }}</li>
+        <li style="width: 14%">{{ $t("calc_select") }}</li>
       </ul>
     </div>
     <!-- row-t 3 -->
@@ -96,7 +96,7 @@
 
 <script>
 export default {
-  name: "TheCalculator",
+  name: "CalculatorPage",
   data() {
     return {
       karjaarid: "json_file",
@@ -105,7 +105,7 @@ export default {
       transportStartPrice: 50,
       transportKmPrice: 2,
       k2ibemaks: 0.2,
-      totalProductPrice: 0.0,
+      selectedProductId: null,
       products: [
         {
           id: "1",
@@ -717,12 +717,11 @@ export default {
     totalPrice() {
       return parseFloat(parseFloat(this.totalProductPrice) + parseFloat(this.totalTransportPrice) + parseFloat(this.totalTaxPrice)).toFixed(2);
     },
-    selectedProductId() {
+    totalProductPrice() {
       const productObj = this.products.find(prod => prod.id === this.selectedProductId);
       return parseFloat(this.selectedAmount * productObj.hindIlmaKm).toFixed(2);
     },
     totalTransportPrice() {
-
       return parseFloat(this.selectedDistance * this.transportKmPrice).toFixed(2);
     },
     totalTaxPrice() {

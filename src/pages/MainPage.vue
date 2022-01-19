@@ -10,6 +10,7 @@
   </section>
   <the-services></the-services>
   <the-machines></the-machines>
+  <work-area></work-area>
   <the-sponsor-section></the-sponsor-section>
   <the-footer></the-footer>
 </template>
@@ -19,7 +20,7 @@ import TheServices from "@/sections/TheServices";
 import TheSponsorSection from "@/sections/TheSponsorSection";
 import TheTextScrollerGadget from "@/components/TheTextScrollerGadget";
 import TheMachines from "@/sections/TheMachines";
-
+import WorkArea from "@/components/WorkArea";
 export default {
   name: "MainPage",
   components: {
@@ -27,6 +28,7 @@ export default {
     TheSponsorSection,
     TheTextScrollerGadget,
     TheMachines,
+    WorkArea
   }
 }
 </script>
@@ -38,6 +40,7 @@ img {
   padding-top: 7rem;
   padding-bottom: 3rem;
 }
+
 
 </style>
 

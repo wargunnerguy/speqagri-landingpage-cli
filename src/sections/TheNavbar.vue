@@ -18,7 +18,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{ $t('calculator') }}</a>
+            <router-link class="nav-link" href="#" tabindex="-1" aria-disabled="true" to="/calc">{{ $t('calculator') }}</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" aria-current="page" :to="{name: 'Jobs'}">{{ $t('job_vacancies') }} <span class="badge bg-danger">0</span></router-link>
