@@ -7,7 +7,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav m-auto">
+        <ul class="navbar-nav m-auto text-uppercase fw-bolder">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                aria-expanded="false">
@@ -18,10 +18,13 @@
             </ul>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" href="#" tabindex="-1" aria-disabled="true" to="/calc">{{ $t('calculator') }}</router-link>
+            <router-link class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" to="/calc">{{ $t('calculator') }}</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" aria-current="page" :to="{name: 'Jobs'}">{{ $t('job_vacancies') }} <span class="badge bg-danger">0</span></router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" aria-current="page" to="/#contact">{{ $t('contact') }}</router-link>
           </li>
         </ul>
         <ul class="navbar-nav">

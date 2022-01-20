@@ -2,9 +2,9 @@
   <section id="sponsor" class="section pb-3">
     <div class="container">
       <img src="@/assets/img/leader.gif" alt=""/>
-      <h1>{{ $t("sponsor_heading_1") }}</h1>
+      <h2>{{ $t("sponsor_heading_1") }}</h2>
       <p>{{ $t("sponsor_message_1") }}</p>
-      <h1>{{ $t("sponsor_heading_2") }}</h1>
+      <h2>{{ $t("sponsor_heading_2") }}</h2>
       <p>{{ $t("sponsor_message_2") }}</p>
     </div>
   </section>
@@ -25,7 +25,11 @@ p {
   font-weight: bold;
 }
 
-h1, p {
+h2, p {
   text-align: left;
+  color: #868686;
+}
+h2 {
+  color: #525252;
 }
 </style>

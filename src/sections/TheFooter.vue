@@ -1,28 +1,51 @@
 <template>
-  <section class="contact-us" id="contact">
+  <footer class="footer navbar-dark bg-dark" id="contact">
     <div class="container">
-      <div class="company-info text-center">
-        <ul>
-          <li>
-            <h6>Telefon</h6>
-            <span><a href="tel:+372 452 2002">+372 452 2002</a></span>
-          </li>
-          <li>
-            <h6>Email</h6>
-            <span>agri@speq.ee</span>
-          </li>
-          <li>
-            <h6>KMK nr</h6>
-            <span>EE101739021</span>
-          </li>
-          <li>
-            <h6>Registrikood</h6>
-            <span>12599060</span>
-          </li>
-        </ul>
+      <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 justify-content-center">
+        <div class="col ">
+          <div class="card bg-transparent border-0">
+            <div class="card-body bg-transparent border-bottom border-1 text-nowrap">
+              <h3><a href="tel:+372 452 2002">+372 452 2002</a></h3>
+            </div>
+            <div class="card-header bg-transparent border-0">
+              <span><i class="fa fa-phone"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="col ">
+          <div class="card bg-transparent border-0">
+            <div class="card-body bg-transparent border-bottom border-1 text-nowrap">
+              <h3><a href="mailto:agri@speq.ee">agri@speq.ee</a></h3>
+            </div>
+            <div class="card-header bg-transparent border-0">
+              <span><i class="fa fa-at"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card bg-transparent border-0">
+            <div class="card-body bg-transparent border-bottom border-1 text-nowrap">
+              <h3>EE101739021</h3>
+            </div>
+            <div class="card-header bg-transparent border-0 fw-bold">
+              <span>KMK nr</span>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card bg-transparent border-0">
+            <div class="card-body bg-transparent border-bottom border-1 text-nowrap">
+              <h3>12599060</h3>
+            </div>
+            <div class="card-header bg-transparent border-0 fw-bold">
+              <span>Registrikood</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </footer>
+  <!-- Footer -->
 </template>
 
 <script>
@@ -32,5 +55,17 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  color: #b0b0b0;
+  font-weight: bold;
+}
 
+span, h3 > a {
+  text-decoration: none;
+  color: lightgrey;
+}
+
+.border-darker {
+  border-color: #575757;
+}
 </style>
