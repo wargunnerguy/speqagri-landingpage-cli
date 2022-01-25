@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" id="nav">
     <div class="container">
       <a class="navbar-brand" href="#">SPEQ Agri</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -14,14 +14,18 @@
               {{ $t('Services') }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li v-for="service in services" :key="service.id" ><a class="dropdown-item" href="#">{{ $t(service.translation_tag)}}</a></li>
+              <li v-for="service in services" :key="service.id"><a class="dropdown-item"
+                                                                   href="#">{{ $t(service.translation_tag) }}</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" to="/calc">{{ $t('calculator') }}</router-link>
+            <router-link class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" to="/calc">
+              {{ $t('calculator') }}
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" aria-current="page" :to="{name: 'Jobs'}">{{ $t('job_vacancies') }} <span class="badge bg-danger">0</span></router-link>
+            <router-link class="nav-link" aria-current="page" :to="{name: 'Jobs'}">{{ $t('job_vacancies') }} <span
+                class="badge bg-danger">0</span></router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" aria-current="page" to="/#contact">{{ $t('contact') }}</router-link>
@@ -53,6 +57,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

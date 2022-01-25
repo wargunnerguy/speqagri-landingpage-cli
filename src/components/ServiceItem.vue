@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     moreInfo() {
-      return this.showDetails ? 'Peida' : 'Täpsemalt';
+      return this.showDetails ? this.$t('hide_info') : this.$t('more_info');
     }
   }
 
