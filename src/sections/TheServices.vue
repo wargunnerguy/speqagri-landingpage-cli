@@ -1,10 +1,8 @@
 <template>
   <section class="our-services" id="services">
     <div class="container">
-      <div class="row">
-        <div class="section-heading">
-          <h2>{{ $t('Services') }}</h2>
-        </div>
+      <div class="section-heading">
+        <h2>{{ $t('Services') }}</h2>
       </div>
       <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-2 g-0">
         <service-item v-for="service in this.$store.state.services"

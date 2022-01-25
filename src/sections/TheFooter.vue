@@ -1,6 +1,6 @@
 <template>
-  <footer class="footer navbar-dark bg-dark" id="contact">
-    <div class="container">
+  <section class="position-relative bottom-0 end-0 bg-dark" id="contact">
+    <div class="container pb-4">
       <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 justify-content-center">
         <div class="col ">
           <div class="card bg-transparent border-0">
@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-  </footer>
+  </section>
   <!-- Footer -->
 </template>
 

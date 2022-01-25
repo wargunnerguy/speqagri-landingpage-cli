@@ -1,9 +1,9 @@
 <template>
   <ul class="list-group list-group-flush border-0 pb-5">
     <li class="list-group-item bg-transparent">
-      <a href="#" class="btn btn-danger">
+      <div href="#" class="btn btn-warning">
         <slot></slot>
-      </a>
+      </div>
     </li>
   </ul>
 </template>
@@ -15,5 +15,7 @@ export default {
 </script>
 
 <style scoped>
-
+.btn {
+  text-transform: uppercase;
+}
 </style>

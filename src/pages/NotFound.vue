@@ -1,13 +1,13 @@
 <template>
   <section>
-    <div class="container">
-      <div class="card">
+    <div class="container ">
+      <div class="card bg-transparent">
         <br>
         <br>
         <br>
         <br>
         <!-- TODO  -->
-        <div class="card-body">Sorri, sellist lehte pole</div>
+        <h2 class="card-body">Sorri, sellist lehte pole</h2>
       </div>
     </div>
   </section>
