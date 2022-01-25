@@ -1,102 +1,36 @@
 <template>
-  <section class="wrapper">
-    <!-- row-t title -->
-    <div class="row-t title">
-      <ul>
-        <li style="width: 35%">{{ $t("calc_product") }}</li>
-        <li style="width: 17%">{{ $t("calc_price") }}</li>
-        <li style="width: 17%">{{ $t("calc_tax") }} 20%</li>
-        <li style="width: 17%">{{ $t("calc_price_and_tax") }}</li>
-        <li style="width: 14%">{{ $t("calc_select") }}</li>
-      </ul>
-    </div>
-    <!-- row-t 3 -->
-    <article v-for="product in products" :key="product.id" class="row-t" :class="product.type">
-      <ul>
-        <label :for="'product_' + product.id">
-          <li style="width: 35%"><a href="#">{{ productFullName(product) }}</a></li>
-          <li style="width: 17%">{{ product.hindIlmaKm }} €/t</li>
-          <li style="width: 17%">{{ calcTax(product.hindIlmaKm, 2) }} €/t</li>
-          <li style="width: 17%">{{ calcTotal(product.hindIlmaKm, 2) }} €/t</li>
-          <input :id="'product_' + product.id" type="radio" :name="product.name" v-model="selectedProductId"
-                 :value="product.id">
-        </label>
-      </ul>
-      <ul class="more-content">
-        <li>{{ product.lisainfo !== '' ? product.lisainfo : '' }}</li>
-      </ul>
-    </article>
+  <base-section>
 
-    <article>
-      <div class="hero-unit" style="background-color: black">
-        <h3 v-if="!selectedProductId"> Vali tabelist toode, mille hinda soovid teada</h3>
-        <div v-else>
-          <h3>{{ products.find(product => product.id === selectedProductId).asukoht }} -
-            {{ products.find(product => product.id === selectedProductId).fraktsioon.toLowerCase() }} - ligikaudne
-            hind: </h3>
-          <div class="row-fluid">
-            <div class="span3">Kogus (min 5t)</div>
-            <div class="span6">
-              <input type="range" min="5" max="200" step="0.1" class="slider" v-model="selectedAmount">
-            </div>
-            <div class="span1 input-append">
-              <input style="width: 3.5em" id="appendedInput" type="number" v-model="selectedAmount">
-              <span class="add-on">tonni</span>
-            </div>
-          </div>
-          <div class="row-fluid">
-            <div class="span3">Kaugus karjäärist</div>
-            <div class="span6">
-              <input type="range" min="0" max="200" step="0.1" class="slider" v-model="selectedDistance">
-            </div>
-            <div class="span1 input-append">
-              <input style="width: 3.5em" type="number" v-model="selectedDistance">
-              <span class="add-on">km</span>
-            </div>
-          </div>
-          <hr>
-          <div class="row-fluid">
-            <div class="span8"></div>
-            <div class="span4 input-prepend input-append">
-              <span class="span6 add-on">Materjalihind</span>
-              <input class="span6" readonly type="number" v-model="totalProductPrice">
-              <span class="add-on">€</span>
-            </div>
-          </div>
-          <div class="row-fluid">
-            <div class="span8"></div>
-            <div class="span4 input-prepend input-append">
-              <span class="span6 add-on">Transpordihind</span>
-              <input class="span6" readonly type="number"
-                     v-model="totalTransportPrice">
-              <span class="add-on">€</span>
-            </div>
-          </div>
-          <div class="row-fluid">
-            <div class="span8"></div>
-            <div class="span4 input-prepend input-append">
-              <span class="span6 add-on">Käibemaks kokku</span>
-              <input class="span6" readonly type="number" v-model="totalTaxPrice">
-              <span class="add-on">€</span>
-            </div>
-          </div>
-          <div class="row-fluid">
-            <div class="span8"></div>
-            <div class="span4 input-prepend input-append">
-              <span class="span6 add-on">Hind kokku</span>
-              <input class="span6" readonly type="number" v-model="totalPrice">
-              <span class="add-on">€</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-  </section>
+    <table class="container">
+      <thead>
+      <tr>
+        <th><h1>{{ $t("calc_product") }}</h1></th>
+        <th><h1>{{ $t("calc_price") }}</h1></th>
+        <th><h1>{{ $t("calc_tax") }} 20%</h1></th>
+        <th><h1>{{ $t("calc_price_and_tax") }}</h1></th>
+        <th><h1>{{ $t("calc_select") }}</h1></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="product in products" :key="product.id" :class="product.type">
+          <td>{{ productFullName(product) }}</td>
+          <td>{{ product.hindIlmaKm }} €/t</td>
+          <td>{{ calcTax(product.hindIlmaKm, 2) }} €/t</td>
+          <td>{{ calcTotal(product.hindIlmaKm, 2) }} €/t</td>
+          <td><input :id="'product_' + product.id" type="radio" :name="product.name" v-model="selectedProductId"
+                 :value="product.id"></td>
+      </tr>
+      </tbody>
+    </table>
+  </base-section>
 </template>
 
 <script>
+import BaseSection from "@/layout/BaseSection";
+
 export default {
-  name: "CalculatorPage",
+  name: "NewCalculator",
+  components: { BaseSection},
   data() {
     return {
       selectedAmount: 5,
@@ -741,403 +675,114 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-/* Google fonts - Open Sans */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+<style lang="scss" scoped>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
-/* colors */
-$blue: rgba(79, 192, 210, 1);
-$green: rgb(27, 172, 145);
-$yellow: rgba(231, 196, 104, 0.7);
-$orange: rgba(235, 118, 85, 1);
-$dark-bg: rgba(30, 30, 30, 0.9);
-$light-bg: rgba(255, 255, 255, 0.1);
-$text: rgba(255, 255, 255, 0.9);
-
-
-/* links */
-.nfl a, .mlb a, .nhl a, .pga a {
-  text-decoration: none;
-  transition: color 0.2s ease-out;
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  color: #A7A1AE;
+  background-color: #1F2739;
 }
 
-.nfl a {
-  color: $blue;
+h1 {
+  font-size: 3em;
+  font-weight: 300;
+  line-height: 1em;
+  text-align: center;
+  color: #e5e5e5;
 }
 
-.nfl a:hover {
-  color: darken($blue, 20%);
-}
-
-.mlb a {
-  color: $green;
-}
-
-.mlb a:hover {
-  color: darken($green, 20%);
-}
-
-.nhl a {
-  color: $yellow;
-}
-
-.nhl a:hover {
-  color: darken($yellow, 20%);
-}
-
-.pga a {
-  color: $orange;
-}
-
-.pga a:hover {
-  color: darken($orange, 20%);
-}
-
-/* wrapper */
-.wrapper {
-  width: 100%;
-  //max-width:1000px;
-  margin: 0 auto 0 auto;
-  padding: 0;
-  background: $dark-bg;
-  color: $text;
-  overflow: hidden;
-  position: relative;
-}
-
-/* lists */
-.row-t ul {
-  margin: 0;
-  padding: 0;
-}
-
-.row-t ul li {
-  margin: 0;
-  font-size: 16px;
-  font-weight: normal;
-  list-style: none;
-  display: inline-block;
-  width: 20%;
-  box-sizing: border-box;
-  @media only screen and (max-width: 767px) and (min-width: 480px) {
-    font-size: 13px;
-  }
-  @media only screen and (max-width: 479px) {
-    font-size: 13px;
-  }
-}
-
-.title ul li {
-  padding: 15px 13px;
-  font-weight: bold;
-}
-
-.row-t ul li {
-  padding: 5px 10px;
-  color: $text;
-}
-
-/* rows */
-.row-t {
-  padding: 20px 0;
-  height: 30px;
-  font-size: 0;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.2s ease-out;
-  border-top: 1px solid darken($light-bg, 100%);
-}
-
-.row-t:hover {
-  background-color: lighten($dark-bg, 10%);
-  height: 65px;
-  @media only screen and (max-width: 767px) {
-    height: 85px;
-  }
-  @media only screen and (max-width: 359px) {
-    height: 105px;
-  }
-}
-
-.title {
-  padding: 25px 0 5px 0;
-  height: 45px;
-  font-size: 0;
-  background-color: $dark-bg;
-  border-left: 3px solid lighten($dark-bg, 100%);
-}
-
-.title:hover {
-  height: 45px;
-  background-color: $dark-bg;
-  border-left: 3px solid lighten($dark-bg, 100%);
-}
-
-.title-hide {
-  @media only screen and (max-width: 767px) {
-    display: none;
-  }
-}
-
-.nfl {
-  border-left: 3px solid darken($blue, 30%);
-}
-
-.nfl:hover {
-  border-left: 3px solid $blue;
-}
-
-.mlb {
-  border-left: 3px solid darken($green, 30%);
-}
-
-.mlb:hover {
-  border-left: 3px solid $green;
-}
-
-.nhl {
-  border-left: 3px solid darken($yellow, 30%)
-}
-
-.nhl:hover {
-  border-left: 3px solid $yellow;
-}
-
-.pga {
-  border-left: 3px solid darken($orange, 30%);
-}
-
-.pga:hover {
-  border-left: 3px solid $orange;
-}
-
-/* row-t one - fadeIn */
-.row-fadeIn-wrapper {
-  opacity: 0;
-  font-size: 0;
-  height: 0;
-  overflow: hidden;
-  position: relative;
-  transition: all 0.2s ease-out;
-  animation: fadeIn 0.4s ease-out 2s 1 alternate;
-  animation-fill-mode: forwards;
-}
-
-.row-fadeIn-wrapper:hover {
-  height: 35px;
-  @media only screen and (max-width: 767px) {
-    height: 55px;
-  }
-  @media only screen and (max-width: 359px) {
-    height: 75px;
-  }
-}
-
-.fadeIn {
-  padding: 20px 0;
-  font-size: 0;
-  position: absolute;
-  transition: all 0.2s ease-out;
-  width: 100%;
-}
-
-.fadeIn:hover {
-  background-color: lighten($dark-bg, 10%);
-}
-
-/* row-t two - fadeOut */
-.row-fadeOut-wrapper {
-  font-size: 0;
-  overflow: hidden;
-  position: relative;
-  transition: all 0.2s ease-out;
-  animation: fadeOut 0.4s ease-out 8s 1 alternate;
-  animation-fill-mode: forwards;
-  opacity: 1;
-  height: 65px;
-}
-
-.row-fadeOut-wrapper:hover {
-  height: 100px;
-}
-
-/* update content */
-.update-row-t {
-  animation: update 0.5s ease-out 12s 1 alternate;
-}
-
-.update1 {
-  position: absolute;
-  top: 25px;
-  display: inline-block;
-  opacity: 1;
-  animation: update1 1s ease-out 12s 1 alternate;
-  animation-fill-mode: forwards;
-}
-
-.update2 {
-  position: absolute;
-  top: 25px;
-  display: inline-block;
-  opacity: 0;
-  animation: update2 4s ease-out 13s 1 alternate;
-  animation-fill-mode: forwards;
-}
-
-/* more content */
-ul.more-content li {
-  position: relative;
-  top: 8px;
-  font-size: 13px;
-  margin: 0;
-  padding: 10px 13px;
+h2 {
+  font-size: 1em;
+  font-weight: 300;
+  text-align: center;
   display: block;
-  height: 50px;
-  width: 100%;
-  color: darken($text, 50%);
-  @media only screen and (max-width: 767px) {
-    font-size: 11px;
-  }
+  line-height: 1em;
+  padding-bottom: 2em;
+  color: #FB667A;
 }
 
-/* small content */
-.small {
-  color: darken($text, 60%);
-  font-size: 10px;
-  padding: 0 10px;
-  margin: 0;
-  @media only screen and (max-width: 767px) {
-    display: none;
-  }
+h2 a {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FB667A;
+  text-decoration: none;
 }
 
-/* keyframe animations */
-@keyframes fadeIn {
-  from {
-    background: $light-bg;
-    opacity: 0;
-    padding: 0;
-  }
-  to {
-    background: darken($light-bg, 80%);
-    opacity: 1;
-    padding: 0 0 65px 0;
-  }
+.blue {
+  color: #d0d0d0;
 }
 
-@keyframes fadeOut {
-  from {
-    background: darken($light-bg, 80%);
-    opacity: 1;
-    height: 65px;
-  }
-  to {
-    background: $light-bg;
-    opacity: 0;
-    height: 0;
-  }
+.orange {
+  color: #f36f36;
 }
 
-@keyframes update {
-  0% {
-    background: darken($light-bg, 80%);
-  }
-  50% {
-    background: $light-bg;
-  }
-  100% {
-    background: darken($light-bg, 80%);
-  }
+.container th h1 {
+  font-weight: bold;
+  font-size: 1em;
+  text-align: left;
+  color: #d7d7d7;
 }
 
-@keyframes update1 {
-  0% {
-    opacity: 0;
-  }
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.container td {
+  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+  -moz-box-shadow: 0 2px 2px -2px #0E1119;
+  box-shadow: 0 2px 2px -2px #0E1119;
 }
 
-@keyframes update2 {
-  0% {
-    opacity: 0;
-    color: $text;
-  }
-  20% {
-    opacity: 1;
-    color: $green;
-  }
-  100% {
-    opacity: 1;
-    color: $text;
-  }
+.container {
+  text-align: left;
+  overflow: hidden;
+  width: 80%;
+  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
 }
 
-.slidecontainer {
-  width: 100%; /* Width of the outside container */
+.container td, .container th {
+  padding-bottom: 2%;
+  padding-top: 2%;
+  padding-left: 2%;
 }
 
-/* The slider itself */
-.slider {
-  -webkit-appearance: none; /* Override default CSS styles */
-  appearance: none;
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-  transition: opacity .2s;
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+  background-color: #323C50;
 }
 
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+  background-color: #2C3446;
 }
 
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #1bac91; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+.container th {
+  background-color: #1F2739;
 }
 
-.slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #1bac91; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+.container tr {
+  color: #f36f36;
 }
 
-.add-on {
-  color: $dark-bg;
-  font-weight: bold !important;
-  background-color: #1bac91 !important;
-}
+.container tr:hover {
+  background-color: #f36f36;
+  color: #422f10;
+  box-shadow: #422f10 -1px 1px, #422f10 -2px 2px, #422f10 -3px 3px, #422f10 -4px 4px, #422f10 -5px 5px, #422f10 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
 
-select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-  font-size: 22px;
+  transition-delay: 0s;
+  transition-duration: 0.4s;
+  transition-property: all;
+  transition-timing-function: linear;
   font-weight: bold;
 }
 
-
+@media (max-width: 800px) {
+  .container td:nth-child(4),
+  .container th:nth-child(4) {
+    display: none;
+  }
+}
 </style>
-
-
-
-
-
-
-
-
-
-
-
-

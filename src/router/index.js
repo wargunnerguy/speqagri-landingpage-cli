@@ -2,7 +2,7 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 import MainPage from "@/pages/MainPage";
 import JobOffers from "@/pages/JobOffers";
 import NotFound from "@/pages/NotFound";
-import CalculatorPage from "@/pages/CalculatorPage";
+import NewCalculator from "@/pages/NewCalculator";
 
 const routes = [
 	{
@@ -18,7 +18,7 @@ const routes = [
 	{
 		path: '/calc',
 		name: 'Calculator',
-		component: CalculatorPage
+		component: NewCalculator
 	},
 	{
 		path: '/:notFound(.*)',

@@ -1,8 +1,6 @@
 <template>
 <section>
-  <header>
-    <h2>Tere</h2>
-  </header>
+    <slot></slot>
 </section>
 </template>
 
@@ -14,7 +12,7 @@ export default {
 
 <style scoped>
 section {
-  padding-top: 1.4rem;
-  background-color: red;
+  padding-top: 4rem;
+  background-color: #f36f36;
 }
 </style>

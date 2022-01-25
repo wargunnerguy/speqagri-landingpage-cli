@@ -19,7 +19,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" to="/calc">
+            <router-link class="nav-link" href="#" tabindex="-1" aria-disabled="true" to="/calc">
               {{ $t('calculator') }}
             </router-link>
           </li>
