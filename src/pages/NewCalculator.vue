@@ -1,6 +1,5 @@
 <template>
   <base-section>
-
     <table class="container">
       <thead>
       <tr>
@@ -13,15 +12,81 @@
       </thead>
       <tbody>
       <tr v-for="product in products" :key="product.id" :class="product.type">
-          <td>{{ productFullName(product) }}</td>
-          <td>{{ product.hindIlmaKm }} €/t</td>
-          <td>{{ calcTax(product.hindIlmaKm, 2) }} €/t</td>
-          <td>{{ calcTotal(product.hindIlmaKm, 2) }} €/t</td>
-          <td><input :id="'product_' + product.id" type="radio" :name="product.name" v-model="selectedProductId"
-                 :value="product.id"></td>
+        <td>{{ productFullName(product) }}</td>
+        <td>{{ product.hindIlmaKm }} €/t</td>
+        <td>{{ calcTax(product.hindIlmaKm, 2) }} €/t</td>
+        <td>{{ calcTotal(product.hindIlmaKm, 2) }} €/t</td>
+        <td><input :id="'product_' + product.id" type="radio" :name="product.name" v-model="selectedProductId"
+                   :value="product.id"></td>
       </tr>
       </tbody>
     </table>
+    <div class="container">
+      <div class="card bg-dark text-light">
+        <h3 v-if="!selectedProductId"> Vali tabelist toode, mille hinda soovid teada</h3>
+        <div v-else>
+          <h3 class="card-header">{{ products.find(product => product.id === selectedProductId).asukoht }} -
+            {{ products.find(product => product.id === selectedProductId).fraktsioon.toLowerCase() }} - ligikaudne
+            hind: </h3>
+          <div class="card-body">
+            <div class="row">
+              <div class="input-group mb-1">
+                <div class="col-3">Kogus (min 5t)</div>
+                <div class="col-6">
+                  <input class="slider" type="range" min="5" max="200" step="0.1" v-model="selectedAmount">
+                </div>
+                <input class="form-control" id="appendedInput" type="number" v-model="selectedAmount">
+                <span class="input-group-text">tonni</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-group mb-1">
+                <div class="col-3">Kaugus karjäärist</div>
+                <div class="col-6">
+                  <input type="range" min="0" max="200" step="0.1" class="slider" v-model="selectedDistance">
+                </div>
+                <input class="form-control" type="number" v-model="selectedDistance">
+                <span class="input-group-text">km</span>
+              </div>
+            </div>
+            <hr>
+            <div>
+              <div class="row col-4">
+                <div class="input-group mb-1 ">
+                  <span class="input-group-text">Materjalihind</span>
+                  <input class="form-control" readonly type="number" v-model="totalProductPrice">
+                  <span class="input-group-text">€</span>
+                </div>
+              </div>
+              <div class="row col-4">
+                <div class="input-group mb-1">
+                  <span class="input-group-text">Transpordihind</span>
+                  <input class="form-control" readonly type="number"
+                         v-model="totalTransportPrice">
+                  <span class="input-group-text">€</span>
+                </div>
+              </div>
+              <div class="row col-4">
+                <div class="input-group mb-1">
+                  <span class="input-group-text">Käibemaks kokku</span>
+                  <input class="form-control" readonly type="number"
+                         v-model="totalTaxPrice">
+                  <span class="input-group-text">€</span>
+                </div>
+              </div>
+              <div class="row col-4">
+                <div class="input-group mb-1">
+                  <span class="input-group-text">Hind kokku</span>
+                  <input class="form-control" readonly type="number"
+                         v-model="totalPrice">
+                  <span class="input-group-text">€</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </base-section>
 </template>
 
@@ -30,7 +95,7 @@ import BaseSection from "@/layout/BaseSection";
 
 export default {
   name: "NewCalculator",
-  components: { BaseSection},
+  components: {BaseSection},
   data() {
     return {
       selectedAmount: 5,
