@@ -36,7 +36,7 @@
                   <input class="slider" type="range" min="5" max="200" step="0.1" v-model="selectedAmount">
                 </div>
                 <input class="form-control" id="appendedInput" type="number" v-model="selectedAmount">
-                <span class="input-group-text">tonni</span>
+                <span class="input-group-text bg-green-custom">tonni</span>
               </div>
             </div>
             <div class="row">
@@ -46,40 +46,40 @@
                   <input type="range" min="0" max="200" step="0.1" class="slider" v-model="selectedDistance">
                 </div>
                 <input class="form-control" type="number" v-model="selectedDistance">
-                <span class="input-group-text">km</span>
+                <span class="input-group-text bg-green-custom">km</span>
               </div>
             </div>
             <hr>
             <div>
-              <div class="row col-4">
+              <div class="row col-3">
                 <div class="input-group mb-1 ">
-                  <span class="input-group-text">Materjalihind</span>
+                  <span class="input-group-text w-50 bg-green-custom">Materjalihind</span>
                   <input class="form-control" readonly type="number" v-model="totalProductPrice">
-                  <span class="input-group-text">€</span>
+                  <span class="input-group-text bg-green-custom">€</span>
                 </div>
               </div>
-              <div class="row col-4">
+              <div class="row col-3">
                 <div class="input-group mb-1">
-                  <span class="input-group-text">Transpordihind</span>
+                  <span class="input-group-text w-50 bg-green-custom">Transpordihind</span>
                   <input class="form-control" readonly type="number"
                          v-model="totalTransportPrice">
-                  <span class="input-group-text">€</span>
+                  <span class="input-group-text bg-green-custom">€</span>
                 </div>
               </div>
-              <div class="row col-4">
+              <div class="row col-3">
                 <div class="input-group mb-1">
-                  <span class="input-group-text">Käibemaks kokku</span>
+                  <span class="input-group-text w-50 bg-green-custom">Käibemaks kokku</span>
                   <input class="form-control" readonly type="number"
                          v-model="totalTaxPrice">
-                  <span class="input-group-text">€</span>
+                  <span class="input-group-text bg-green-custom">€</span>
                 </div>
               </div>
-              <div class="row col-4">
+              <div class="row col-3">
                 <div class="input-group mb-1">
-                  <span class="input-group-text">Hind kokku</span>
+                  <span class="input-group-text w-50 bg-green-custom">Hind kokku</span>
                   <input class="form-control" readonly type="number"
                          v-model="totalPrice">
-                  <span class="input-group-text">€</span>
+                  <span class="input-group-text bg-green-custom">€</span>
                 </div>
               </div>
             </div>
@@ -849,5 +849,9 @@ h2 a {
   .container th:nth-child(4) {
     display: none;
   }
+}
+
+.bg-green-custom {
+  background-color: #1bac91
 }
 </style>
