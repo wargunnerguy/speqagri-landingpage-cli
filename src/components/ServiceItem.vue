@@ -1,8 +1,8 @@
 <template>
-  <div class="card ms-5 mt-5 mb-5" :class="{'selectedServiceBg': showDetails}">
+  <div class="card m-2" :class="{'selectedServiceBg': showDetails}">
     <img :src="img" class="card-img-top" alt="">
     <div class="card-body text-light">
-      <h5 v-if="!showDetails" class="card-title">{{ name }}</h5>
+      <h5 v-if="!showDetails" class="card-subtitle">{{ name }}</h5>
       <div v-if="showDetails" class="card-text">{{ description }}</div>
     </div>
     <the-service-item-button @click="toggleDetails">{{ moreInfo }}</the-service-item-button>
@@ -45,7 +45,7 @@ export default {
   border: dashed #bb562a 3px;
 }
 img {
-  transform: scale(1.1);
+  /*transform: scale(1.1);*/
 }
 
 p {

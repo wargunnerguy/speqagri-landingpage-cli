@@ -1,5 +1,8 @@
 <template>
   <base-section>
+    <div v-if="!selectedProductId" class="header">
+      <h3 class="bg-light text-dark">{{ $t('calc_select_product') }}</h3>
+    </div>
     <table class="container">
       <thead>
       <tr>
@@ -23,63 +26,68 @@
     </table>
     <div class="container">
       <div class="card bg-dark text-light">
-        <h3 v-if="!selectedProductId"> Vali tabelist toode, mille hinda soovid teada</h3>
-        <div v-else>
+        <h3 v-if="!selectedProductId" class="bg-light text-dark text-center w-100">{{ $t('calc_select_product') }}</h3>
+        <div v-if="selectedProductId">
           <h3 class="card-header">{{ products.find(product => product.id === selectedProductId).asukoht }} -
             {{ products.find(product => product.id === selectedProductId).fraktsioon.toLowerCase() }} - ligikaudne
             hind: </h3>
           <div class="card-body">
             <div class="row">
-              <div class="input-group mb-1">
-                <div class="col-3">Kogus (min 5t)</div>
-                <div class="col-6">
-                  <input class="slider" type="range" min="5" max="200" step="0.1" v-model="selectedAmount">
-                </div>
-                <input class="form-control" id="appendedInput" type="number" v-model="selectedAmount">
+              <div class="input-group mb-1 ">
+                <span class="input-group-text bg-green-custom col-6 col-md-4 col-lg-3">Kogus (min 5t)</span>
+                <input type="range" min="0" max="200" step="0.1" class="slider col-lg-7 d-none d-md-inline" v-model="selectedAmount">
+                <input class="form-control col-lg-2 col-sm-auto" readonly type="number" v-model="selectedAmount">
                 <span class="input-group-text bg-green-custom">tonni</span>
               </div>
             </div>
             <div class="row">
-              <div class="input-group mb-1">
-                <div class="col-3">Kaugus karjäärist</div>
-                <div class="col-6">
-                  <input type="range" min="0" max="200" step="0.1" class="slider" v-model="selectedDistance">
-                </div>
-                <input class="form-control" type="number" v-model="selectedDistance">
+              <div class="input-group mb-1 ">
+                <span class="input-group-text bg-green-custom col-6 col-md-4 col-lg-3">{{ $t('calc_distance_quarry') }}</span>
+                <input type="range" min="0" max="200" step="0.1" class="slider col-lg-7 d-none d-md-inline" v-model="selectedDistance">
+                <input class="form-control col-lg-2" readonly type="number" v-model="selectedDistance">
                 <span class="input-group-text bg-green-custom">km</span>
               </div>
             </div>
             <hr>
+            <!-- Alumised calc andmed            -->
             <div>
-              <div class="row col-3">
-                <div class="input-group mb-1 ">
-                  <span class="input-group-text w-50 bg-green-custom">Materjalihind</span>
-                  <input class="form-control" readonly type="number" v-model="totalProductPrice">
-                  <span class="input-group-text bg-green-custom">€</span>
+              <div class="d-flex flex-row-reverse">
+                <div class=" col-lg-4 col-sm-12 col-12">
+                  <div class="input-group mb-1 ">
+                    <span class="input-group-text w-50 bg-green-custom">{{ $t('calc_material_price') }}</span>
+                    <input class="form-control" readonly type="number" v-model="totalProductPrice">
+                    <span class="input-group-text bg-green-custom">€</span>
+                  </div>
                 </div>
               </div>
-              <div class="row col-3">
-                <div class="input-group mb-1">
-                  <span class="input-group-text w-50 bg-green-custom">Transpordihind</span>
-                  <input class="form-control" readonly type="number"
-                         v-model="totalTransportPrice">
-                  <span class="input-group-text bg-green-custom">€</span>
+              <div class="d-flex flex-row-reverse">
+                <div class=" col-lg-4 col-sm-12 col-12">
+                  <div class="input-group mb-1">
+                    <span class="input-group-text w-50 bg-green-custom">{{ $t('calc_transport_price') }}</span>
+                    <input class="form-control" readonly type="number"
+                           v-model="totalTransportPrice">
+                    <span class="input-group-text bg-green-custom">€</span>
+                  </div>
                 </div>
               </div>
-              <div class="row col-3">
-                <div class="input-group mb-1">
-                  <span class="input-group-text w-50 bg-green-custom">Käibemaks kokku</span>
-                  <input class="form-control" readonly type="number"
-                         v-model="totalTaxPrice">
-                  <span class="input-group-text bg-green-custom">€</span>
+              <div class="d-flex flex-row-reverse">
+                <div class=" col-lg-4 col-sm-12 col-12">
+                  <div class="input-group mb-1">
+                    <span class="input-group-text w-50 bg-green-custom">{{ $t('calc_total_vat') }}</span>
+                    <input class="form-control" readonly type="number"
+                           v-model="totalTaxPrice">
+                    <span class="input-group-text bg-green-custom">€</span>
+                  </div>
                 </div>
               </div>
-              <div class="row col-3">
-                <div class="input-group mb-1">
-                  <span class="input-group-text w-50 bg-green-custom">Hind kokku</span>
-                  <input class="form-control" readonly type="number"
-                         v-model="totalPrice">
-                  <span class="input-group-text bg-green-custom">€</span>
+              <div class="d-flex flex-row-reverse">
+                <div class=" col-lg-4 col-sm-12 col-12">
+                  <div class="input-group mb-1">
+                    <span class="input-group-text w-50 bg-green-custom">{{ $t('calc_total_price') }}</span>
+                    <input class="form-control" readonly type="number"
+                           v-model="totalPrice">
+                    <span class="input-group-text bg-green-custom">€</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -854,4 +862,19 @@ h2 a {
 .bg-green-custom {
   background-color: #1bac91
 }
+
+$form-range-track-height: 2rem;
+$form-range-track-cursor: pointer;
+$form-range-track-bg: gray;
+$form-range-track-border-radius: 1rem;
+$form-range-track-box-shadow: red;
+
+$form-range-thumb-width: 1rem;
+$form-range-thumb-height: red;
+$form-range-thumb-bg: blue;
+$form-range-thumb-border: 0;
+$form-range-thumb-border-radius: 1rem;
+$form-range-thumb-box-shadow: 0 .1rem .25rem rgba(black, .1);
+$form-range-thumb-active-bg: tint-color(red, 70%);
+$form-range-thumb-disabled-bg: gray;
 </style>
