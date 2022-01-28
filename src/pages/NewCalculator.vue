@@ -1,25 +1,29 @@
 <template>
   <base-section>
-    <div v-if="!selectedProductId" class="header">
-      <h3 class="bg-light text-dark">{{ $t('calc_select_product') }}</h3>
+    <div class="bg-dark justify-content-center sticky-top">
+      <div class="card bg-transparent">
+        <div class="card-title d-flex flex-fill justify-content-center text-light p-0 mb-0">
+          <h3 class="p-0 m-0">{{ $t('calc_select_quarries') }}</h3>
+        </div>
+        <div class="card-body d-flex flex-fill justify-content-center m-0">
+          <button v-for="location in quarry_locs" @click="toggleLocationFilter(location)" :key="location" type="button"
+                  class="btn btn-primary ms-2 mt-3"
+                  :class="{isActiveFilter: isAnActiveFilter(location), isNotActiveFilter: !isAnActiveFilter(location)}">
+            {{ location }}
+          </button>
+        </div>
+      </div>
+
     </div>
     <table class="container">
       <thead>
       <tr>
         <th><h1>{{ $t("calc_product") }}</h1></th>
         <th>
-          <div @click="flipSorting"><h1>{{ $t("calc_price") }}
-            <span v-if="sorting === 'desc'">
-              <i class="fa fa-arrow-down"></i>
-            </span>
-            <span v-else>
-              <i class="fa fa-arrow-up"></i>
-            </span>
-          </h1>
-          </div>
+          <h1>{{ $t('calc_location') }}</h1>
         </th>
         <th>
-          <div @click="flipSorting"><h1>{{ $t("calc_tax") }} 20%
+          <div @click="flipSorting"><h1>{{ $t("calc_price") }}
             <span v-if="sorting === 'desc'">
               <i class="fa fa-arrow-down"></i>
             </span>
@@ -44,10 +48,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="product in sortedProducts" :key="product.id" :class="product.type">
+      <tr v-for="product in filteredProducts" :key="product.id" :class="product.type">
         <td>{{ productFullName(product) }}</td>
+        <td>
+          <button type="button" class="btn btn-primary m-0">
+            {{ product.asukoht }}
+          </button>
+        </td>
         <td>{{ product.hindIlmaKm }} €/t</td>
-        <td>{{ calcTax(product.hindIlmaKm, 2) }} €/t</td>
+        <!--        <td>{{ calcTax(product.hindIlmaKm, 2) }} €/t</td>-->
         <td>{{ calcTotal(product.hindIlmaKm, 2) }} €/t</td>
         <td><input :id="'product_' + product.id" type="radio" :name="product.name" v-model="selectedProductId"
                    :value="product.id"></td>
@@ -56,19 +65,23 @@
     </table>
     <div class="container">
       <div class="card bg-dark text-light">
-        <h3 v-if="!selectedProductId" class="bg-light text-dark text-center w-100">{{ $t('calc_select_product') }}</h3>
+        <h3 v-if="selectedLocations <= 0" class="bg-danger text-dark text-center w-100">
+          {{ $t('calc_select_atleast_one_location') }}</h3>
+        <h3 v-if="!selectedProductId" class="bg-danger text-dark text-center w-100">{{ $t('calc_select_product') }}</h3>
         <div v-if="selectedProductId">
           <h3 class="card-header">{{ products.find(product => product.id === selectedProductId).asukoht }} -
-            {{ products.find(product => product.id === selectedProductId).fraktsioon.toLowerCase() }} - ligikaudne
-            hind: </h3>
+            {{ products.find(product => product.id === selectedProductId).fraktsioon.toLowerCase() }} -
+            {{ $t('calc_approx_price') }}: </h3>
           <div class="card-body">
             <div class="row">
               <div class="input-group mb-1 ">
-                <span class="input-group-text bg-green-custom col-6 col-md-4 col-lg-3">Kogus (min 5t)</span>
+                <span class="input-group-text bg-green-custom col-6 col-md-4 col-lg-3">{{
+                    $t('calc_amount')
+                  }} (min 5t)</span>
                 <input type="range" min="0" max="200" step="0.1" class="slider col-lg-7 d-none d-md-inline"
                        v-model="selectedAmount">
                 <input class="form-control col-lg-2 col-sm-auto" type="number" v-model="selectedAmount">
-                <span class="input-group-text bg-green-custom">tonni</span>
+                <span class="input-group-text bg-green-custom">{{ $t('calc_tonnes') }}</span>
               </div>
             </div>
             <div class="row">
@@ -78,7 +91,7 @@
                 <input type="range" min="0" max="200" step="0.1" class="slider col-lg-7 d-none d-md-inline"
                        v-model="selectedDistance">
                 <input class="form-control col-lg-2" type="number" v-model="selectedDistance">
-                <span class="input-group-text bg-green-custom">km</span>
+                <span class="input-group-text bg-green-custom">{{ $t('calc_km') }}</span>
               </div>
             </div>
             <hr>
@@ -145,6 +158,7 @@ export default {
       transportKmPrice: 2,
       k2ibemaks: 0.2,
       selectedProductId: null,
+      selectedLocations: [],
       sorting: 'desc',
       products: [
         {
@@ -772,10 +786,24 @@ export default {
         this.sorting = 'asc'
       }
     },
+    isAnActiveFilter(location) {
+      return this.selectedLocations.includes(location)
+    },
+    toggleLocationFilter(location) {
+      if (this.selectedLocations.includes(location)) {
+        this.selectedLocations = this.selectedLocations.filter(loc => loc !== location)
+        console.log(this.selectedLocations)
+      } else {
+        this.selectedLocations.push(location)
+      }
+    },
   },
   computed: {
+    quarry_locs() {
+      return [...new Set(this.products.map(item => item.asukoht.split(' ')[0]))];
+    },
     sortedProducts() {
-      const sortedList = [...this.products].sort((a, b) => {
+      return [...this.products].sort((a, b) => {
         if (this.sorting === 'asc') {
           return parseFloat(a.hindIlmaKm) - parseFloat(b.hindIlmaKm)
         }
@@ -783,7 +811,11 @@ export default {
           return parseFloat(b.hindIlmaKm) - parseFloat(a.hindIlmaKm)
         }
       });
-      return sortedList;
+    },
+    filteredProducts() {
+      return this.sortedProducts.filter(prod => {
+        return this.selectedLocations.includes(prod.asukoht.split(' ')[0])
+      })
     },
     totalPrice() {
       return parseFloat(parseFloat(this.totalProductPrice) + parseFloat(this.totalTransportPrice) + parseFloat(this.totalTaxPrice)).toFixed(2);
@@ -799,11 +831,23 @@ export default {
       return parseFloat(this.totalTransportPrice * this.k2ibemaks + this.totalProductPrice * this.k2ibemaks).toFixed(2);
     },
   },
+  created() {
+    this.selectedLocations = [...this.quarry_locs]
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+.isActiveFilter {
+  background-color: green;
+  font-weight: bold;
+}
+
+.isNotActiveFilter {
+  background-color: #646464;
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -931,10 +975,8 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
-  //box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: #1bac91;
   border-radius: 1.3px;
-  //border: 0.2px solid #010101;
 }
 
 input[type=range]::-webkit-slider-thumb {
