@@ -7,14 +7,44 @@
       <thead>
       <tr>
         <th><h1>{{ $t("calc_product") }}</h1></th>
-        <th><h1>{{ $t("calc_price") }}</h1></th>
-        <th><h1>{{ $t("calc_tax") }} 20%</h1></th>
-        <th><h1>{{ $t("calc_price_and_tax") }}</h1></th>
+        <th>
+          <div @click="flipSorting"><h1>{{ $t("calc_price") }}
+            <span v-if="sorting === 'desc'">
+              <i class="fa fa-arrow-down"></i>
+            </span>
+            <span v-else>
+              <i class="fa fa-arrow-up"></i>
+            </span>
+          </h1>
+          </div>
+        </th>
+        <th>
+          <div @click="flipSorting"><h1>{{ $t("calc_tax") }} 20%
+            <span v-if="sorting === 'desc'">
+              <i class="fa fa-arrow-down"></i>
+            </span>
+            <span v-else>
+              <i class="fa fa-arrow-up"></i>
+            </span>
+          </h1>
+          </div>
+        </th>
+        <th>
+          <div @click="flipSorting"><h1>{{ $t("calc_price_and_tax") }}
+            <span v-if="sorting === 'desc'">
+              <i class="fa fa-arrow-down"></i>
+            </span>
+            <span v-else>
+              <i class="fa fa-arrow-up"></i>
+            </span>
+          </h1>
+          </div>
+        </th>
         <th><h1>{{ $t("calc_select") }}</h1></th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="product in products" :key="product.id" :class="product.type">
+      <tr v-for="product in sortedProducts" :key="product.id" :class="product.type">
         <td>{{ productFullName(product) }}</td>
         <td>{{ product.hindIlmaKm }} €/t</td>
         <td>{{ calcTax(product.hindIlmaKm, 2) }} €/t</td>
@@ -35,16 +65,19 @@
             <div class="row">
               <div class="input-group mb-1 ">
                 <span class="input-group-text bg-green-custom col-6 col-md-4 col-lg-3">Kogus (min 5t)</span>
-                <input type="range" min="0" max="200" step="0.1" class="slider col-lg-7 d-none d-md-inline" v-model="selectedAmount">
-                <input class="form-control col-lg-2 col-sm-auto" readonly type="number" v-model="selectedAmount">
+                <input type="range" min="0" max="200" step="0.1" class="slider col-lg-7 d-none d-md-inline"
+                       v-model="selectedAmount">
+                <input class="form-control col-lg-2 col-sm-auto" type="number" v-model="selectedAmount">
                 <span class="input-group-text bg-green-custom">tonni</span>
               </div>
             </div>
             <div class="row">
               <div class="input-group mb-1 ">
-                <span class="input-group-text bg-green-custom col-6 col-md-4 col-lg-3">{{ $t('calc_distance_quarry') }}</span>
-                <input type="range" min="0" max="200" step="0.1" class="slider col-lg-7 d-none d-md-inline" v-model="selectedDistance">
-                <input class="form-control col-lg-2" readonly type="number" v-model="selectedDistance">
+                <span class="input-group-text bg-green-custom col-6 col-md-4 col-lg-3">
+                  {{ $t('calc_distance_quarry') }}</span>
+                <input type="range" min="0" max="200" step="0.1" class="slider col-lg-7 d-none d-md-inline"
+                       v-model="selectedDistance">
+                <input class="form-control col-lg-2" type="number" v-model="selectedDistance">
                 <span class="input-group-text bg-green-custom">km</span>
               </div>
             </div>
@@ -112,6 +145,7 @@ export default {
       transportKmPrice: 2,
       k2ibemaks: 0.2,
       selectedProductId: null,
+      sorting: 'desc',
       products: [
         {
           id: "1",
@@ -719,7 +753,38 @@ export default {
       ],
     }
   },
+  methods: {
+    calcTax(price, round) {
+      return parseFloat(price * this.k2ibemaks).toFixed(round);
+    },
+    calcTotal(price, round) {
+      return parseFloat(price * (1 + this.k2ibemaks)).toFixed(round);
+    },
+    productFullName(product) {
+      return product.fraktsioon;
+    },
+    flipSorting() {
+      if (this.sorting === 'asc') {
+        this.sorting = 'desc'
+        return
+      }
+      if (this.sorting === 'desc') {
+        this.sorting = 'asc'
+      }
+    },
+  },
   computed: {
+    sortedProducts() {
+      const sortedList = [...this.products].sort((a, b) => {
+        if (this.sorting === 'asc') {
+          return parseFloat(a.hindIlmaKm) - parseFloat(b.hindIlmaKm)
+        }
+        if (this.sorting === 'desc') {
+          return parseFloat(b.hindIlmaKm) - parseFloat(a.hindIlmaKm)
+        }
+      });
+      return sortedList;
+    },
     totalPrice() {
       return parseFloat(parseFloat(this.totalProductPrice) + parseFloat(this.totalTransportPrice) + parseFloat(this.totalTaxPrice)).toFixed(2);
     },
@@ -732,17 +797,6 @@ export default {
     },
     totalTaxPrice() {
       return parseFloat(this.totalTransportPrice * this.k2ibemaks + this.totalProductPrice * this.k2ibemaks).toFixed(2);
-    },
-  },
-  methods: {
-    calcTax(price, round) {
-      return parseFloat(price * this.k2ibemaks).toFixed(round);
-    },
-    calcTotal(price, round) {
-      return parseFloat(price * (1 + this.k2ibemaks)).toFixed(round);
-    },
-    productFullName(product) {
-      return product.fraktsioon;
     },
   },
 }
@@ -863,18 +917,102 @@ h2 a {
   background-color: #1bac91
 }
 
-$form-range-track-height: 2rem;
-$form-range-track-cursor: pointer;
-$form-range-track-bg: gray;
-$form-range-track-border-radius: 1rem;
-$form-range-track-box-shadow: red;
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  //width: 100%;
+}
 
-$form-range-thumb-width: 1rem;
-$form-range-thumb-height: red;
-$form-range-thumb-bg: blue;
-$form-range-thumb-border: 0;
-$form-range-thumb-border-radius: 1rem;
-$form-range-thumb-box-shadow: 0 .1rem .25rem rgba(black, .1);
-$form-range-thumb-active-bg: tint-color(red, 70%);
-$form-range-thumb-disabled-bg: gray;
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  //box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #1bac91;
+  border-radius: 1.3px;
+  //border: 0.2px solid #010101;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -14px;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #127e6a;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #127e6a;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: #127e6a;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: #127e6a;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: #127e6a;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: #127e6a;
+}
+
 </style>
