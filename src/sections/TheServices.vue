@@ -10,6 +10,7 @@
                       :img="require(`@/assets/img/icons/${service.img}.png`)"
                       :name=$t(service.translation_tag)
                       :description=$t(service.desc)
+                      :link="service.link"
         ></service-item>
       </div>
     </div>

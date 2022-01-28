@@ -1,5 +1,5 @@
 <template>
-  <ul class="list-group list-group-flush border-0 pb-5">
+  <ul class="list-group list-group-flush border-0 pb-2">
     <li class="list-group-item bg-transparent">
       <div href="#" class="btn">
         <slot></slot>

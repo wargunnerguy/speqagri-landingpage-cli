@@ -10,6 +10,7 @@ const store = createStore({
 					translation_tag: "bulk_material_transport_service",
 					desc: "bulk_material_transport_service_text",
 					img: "bulk_material_transport_service",
+					link: "",
 				},
 				{
 					id: "2",
@@ -17,6 +18,7 @@ const store = createStore({
 					translation_tag: "recycled_asphalt_service",
 					desc: "recycled_asphalt_service_text",
 					img: "recycled_asphalt_service",
+					link: "",
 				},
 				{
 					id: "3",
@@ -24,6 +26,7 @@ const store = createStore({
 					translation_tag: "car_rental_service",
 					desc: "car_rental_service_text",
 					img: "car_rental_service",
+					link: "",
 				},
 				{
 					id: "4",
@@ -31,6 +34,7 @@ const store = createStore({
 					translation_tag: "landscaping_service",
 					desc: "landscaping_service_text",
 					img: "landscaping_service",
+					link: "",
 				},
 				{
 					id: "5",
@@ -38,6 +42,7 @@ const store = createStore({
 					translation_tag: "winding_service",
 					desc: "winding_service_text",
 					img: "winding_service",
+					link: "https://fekaaliabi.ee",
 				},
 				{
 					id: "6",
@@ -45,6 +50,7 @@ const store = createStore({
 					translation_tag: "transport_service",
 					desc: "transport_service_text",
 					img: "transport_service",
+					link: "",
 				},
 				{
 					id: "7",
@@ -52,6 +58,7 @@ const store = createStore({
 					translation_tag: "excavation_service",
 					desc: "excavation_service_text",
 					img: "excavation_service",
+					link: "",
 				},
 				{
 					id: "8",
@@ -59,6 +66,7 @@ const store = createStore({
 					translation_tag: "telehandler_service",
 					desc: "telehandler_service_text",
 					img: "telehandler_service",
+					link: "",
 				},
 				{
 					id: "9",
@@ -66,6 +74,7 @@ const store = createStore({
 					translation_tag: "rental_service",
 					desc: "rental_service_text",
 					img: "rental_service",
+					link: "",
 				},
 				{
 					id: "10",
@@ -73,6 +82,7 @@ const store = createStore({
 					translation_tag: "maintenance_service",
 					desc: "maintenance_service_text",
 					img: "maintenance_service",
+					link: "",
 				},
 				{
 					id: "11",
@@ -80,6 +90,7 @@ const store = createStore({
 					translation_tag: "car_repair_service",
 					desc: "car_repair_service_text",
 					img: "car_repair_service",
+					link: "",
 				},
 				{
 					id: "12",
@@ -87,6 +98,7 @@ const store = createStore({
 					translation_tag: "snow_removal_service",
 					desc: "snow_removal_service_text",
 					img: "snow_removal_service",
+					link: "",
 				},
 			]
 		}
