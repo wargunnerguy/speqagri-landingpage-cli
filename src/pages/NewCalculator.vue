@@ -957,9 +957,6 @@ h2 a {
   }
 }
 
-.bg-green-custom {
-  background-color: #1bac91
-}
 
 input[type=range] {
   -webkit-appearance: none;

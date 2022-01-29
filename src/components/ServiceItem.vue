@@ -1,12 +1,13 @@
 <template>
     <div class="card m-2" :class="{'selectedServiceBg': showDetails}">
-      <img :src="img" class="card-img-top" alt="">
+      <img :src="img" class="card-img-top pt-2" alt="">
       <div class="card-body text-light">
         <h5 v-if="!showDetails" class="card-subtitle">{{ name }}</h5>
         <div v-if="showDetails" class="card-text">{{ description }}</div>
       </div>
       <the-service-item-button @click="toggleDetails">{{ moreInfo }}</the-service-item-button>
       <a class="service-item-link mb-2 rounded" v-if="link.trim() !== ''" :key="link" :href="link">Link</a>
+      <router-link class="service-item-link mb-2 rounded" v-if="uri.trim() !== ''" :key="uri" :to="uri">Link</router-link>
     </div>
 </template>
 
@@ -15,7 +16,7 @@ import TheServiceItemButton from "@/components/TheServiceItemButton";
 
 export default {
   name: "ServiceItem",
-  props: ['img', 'description', 'name', 'link'],
+  props: ['img', 'description', 'name', 'link', 'uri'],
   components: {
     TheServiceItemButton
   },

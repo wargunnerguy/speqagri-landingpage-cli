@@ -6,6 +6,7 @@ import '@/assets/css/template-basic-style.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import VueLazyLoad from 'vue3-lazyload';
+import BaseButton from "@/layout/BaseButton";
 
 import i18n from './i18n'
 import store from "@/store";
@@ -15,5 +16,6 @@ createApp(App).use(router)
 	.use(i18n)
 	.use(VueLazyLoad)
 	.use(store)
+	.component('base-button', BaseButton)
 	.mount('#app')
 

@@ -11,6 +11,7 @@ const store = createStore({
 					desc: "bulk_material_transport_service_text",
 					img: "bulk_material_transport_service",
 					link: "",
+					uri: "/puiste",
 				},
 				{
 					id: "2",
@@ -19,6 +20,7 @@ const store = createStore({
 					desc: "recycled_asphalt_service_text",
 					img: "recycled_asphalt_service",
 					link: "",
+					uri: "/frees",
 				},
 				{
 					id: "3",
@@ -27,6 +29,7 @@ const store = createStore({
 					desc: "car_rental_service_text",
 					img: "car_rental_service",
 					link: "",
+					uri: "car_rent",
 				},
 				{
 					id: "4",
@@ -35,6 +38,7 @@ const store = createStore({
 					desc: "landscaping_service_text",
 					img: "landscaping_service",
 					link: "",
+					uri: "",
 				},
 				{
 					id: "5",
@@ -43,6 +47,7 @@ const store = createStore({
 					desc: "winding_service_text",
 					img: "winding_service",
 					link: "https://fekaaliabi.ee",
+					uri: "",
 				},
 				{
 					id: "6",
@@ -51,6 +56,7 @@ const store = createStore({
 					desc: "transport_service_text",
 					img: "transport_service",
 					link: "",
+					uri: "",
 				},
 				{
 					id: "7",
@@ -59,6 +65,7 @@ const store = createStore({
 					desc: "excavation_service_text",
 					img: "excavation_service",
 					link: "",
+					uri: "",
 				},
 				{
 					id: "8",
@@ -67,6 +74,7 @@ const store = createStore({
 					desc: "telehandler_service_text",
 					img: "telehandler_service",
 					link: "",
+					uri: "",
 				},
 				{
 					id: "9",
@@ -75,6 +83,7 @@ const store = createStore({
 					desc: "rental_service_text",
 					img: "rental_service",
 					link: "",
+					uri: "",
 				},
 				{
 					id: "10",
@@ -83,6 +92,7 @@ const store = createStore({
 					desc: "maintenance_service_text",
 					img: "maintenance_service",
 					link: "",
+					uri: "",
 				},
 				{
 					id: "11",
@@ -91,6 +101,7 @@ const store = createStore({
 					desc: "car_repair_service_text",
 					img: "car_repair_service",
 					link: "",
+					uri: "/car_repair",
 				},
 				{
 					id: "12",
@@ -99,6 +110,7 @@ const store = createStore({
 					desc: "snow_removal_service_text",
 					img: "snow_removal_service",
 					link: "",
+					uri: "",
 				},
 			]
 		}

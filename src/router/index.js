@@ -3,6 +3,10 @@ import MainPage from "@/pages/MainPage";
 import JobOffers from "@/pages/JobOffers";
 import NotFound from "@/pages/NotFound";
 import NewCalculator from "@/pages/NewCalculator";
+import TourneoRent from "@/pages/TourneoRent";
+import Freesasfalt from "@/pages/Freesasfalt";
+import KruusMuld from "@/pages/KruusMuld";
+import CarRepair from "@/pages/CarRepair";
 
 const routes = [
 	{
@@ -19,6 +23,26 @@ const routes = [
 		path: '/calc',
 		name: 'Calculator',
 		component: NewCalculator
+	},
+	{
+		path: '/car_rent',
+		name: 'CarRent',
+		component: TourneoRent,
+	},
+	{
+		path: '/frees',
+		name: 'Freesasfalt',
+		component: Freesasfalt,
+	},
+	{
+		path: '/puiste',
+		name: 'KruusMuld',
+		component: KruusMuld,
+	},
+	{
+		path: '/car_repair',
+		name: 'CarRepair',
+		component: CarRepair,
 	},
 	{
 		path: '/:notFound(.*)',

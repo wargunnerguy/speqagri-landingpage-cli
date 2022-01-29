@@ -32,5 +32,11 @@ export default {
     border: none;
   }
 
+  .bg-green-custom {
+    background-color: #1bac91
+  }
+  .bg-green-light-custom {
+    background-color: #26c8aa
+  }
 }
 </style>

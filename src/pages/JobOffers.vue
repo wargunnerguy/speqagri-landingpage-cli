@@ -1,6 +1,6 @@
 <template>
   <base-section>
-    <div>tere</div>
+    <div>Hetkel tööpakkumised puuduvad</div>
   </base-section>
 </template>
 

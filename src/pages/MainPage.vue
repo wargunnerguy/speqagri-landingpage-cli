@@ -20,7 +20,7 @@ import TheServices from "@/sections/TheServices";
 import TheSponsorSection from "@/sections/TheSponsorSection";
 import TheTextScrollerGadget from "@/components/TheTextScrollerGadget";
 import TheMachines from "@/sections/TheMachines";
-import WorkArea from "@/components/WorkArea";
+import WorkArea from "@/sections/WorkArea";
 export default {
   name: "MainPage",
   components: {

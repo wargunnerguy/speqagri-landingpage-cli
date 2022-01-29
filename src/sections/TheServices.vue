@@ -11,6 +11,7 @@
                       :name=$t(service.translation_tag)
                       :description=$t(service.desc)
                       :link="service.link"
+                      :uri="service.uri"
         ></service-item>
       </div>
     </div>
