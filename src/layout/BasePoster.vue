@@ -6,7 +6,7 @@
         src: require(`@/assets/${img_link}`),
         loading: require(`@/assets/${mediaTinyName}`),
         error: ''}"/>
-      <img v-else class="card-img-top img-fluid p-3" :src="require(`@/assets/${img_link}`)" alt="">
+      <img v-else-if="img_link" class="card-img-top img-fluid p-3" :src="require(`@/assets/${img_link}`)" alt="">
       <div class="card-body">
         <slot></slot>
       </div>
