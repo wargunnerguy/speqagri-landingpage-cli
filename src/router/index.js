@@ -7,6 +7,7 @@ import TourneoRent from "@/pages/TourneoRent";
 import Freesasfalt from "@/pages/Freesasfalt";
 import KruusMuld from "@/pages/KruusMuld";
 import CarRepair from "@/pages/CarRepair";
+import Biopuhastid from "@/pages/Biopuhastid";
 
 const routes = [
 	{
@@ -43,6 +44,11 @@ const routes = [
 		path: '/car_repair',
 		name: 'CarRepair',
 		component: CarRepair,
+	},
+	{
+		path: '/biopuhastid',
+		name: 'Biopuhastid',
+		component: Biopuhastid,
 	},
 	{
 		path: '/:notFound(.*)',

@@ -112,6 +112,15 @@ const store = createStore({
 					link: "",
 					uri: "",
 				},
+				{
+					id: "13",
+					name: "Septic tanks",
+					translation_tag: "septic_tank_service",
+					desc: "septic_tank_service_text",
+					img: "septics",
+					link: "",
+					uri: "/biopuhastid",
+				},
 			]
 		}
 	},
